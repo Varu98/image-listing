@@ -12,11 +12,24 @@ import {
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 import { Logo } from './Logo';
 import Layout from './components/layout/Layout';
+import ImageCard from './components/cards/ImageCard';
 
 function App() {
   return (
     <ChakraProvider theme={theme}>
-      <Layout></Layout>
+      <Layout>
+        <Grid padding={4} gap={'1rem'} gridTemplateColumns={'repeat(3, 1fr)'}>
+          <ImageCard />
+          <ImageCard />
+          <ImageCard />
+          <ImageCard />
+          <ImageCard />
+          <ImageCard />
+          <ImageCard />
+          <ImageCard />
+          <ImageCard />
+        </Grid>
+      </Layout>
     </ChakraProvider>
   );
 }
