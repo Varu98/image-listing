@@ -7,7 +7,9 @@ const Layout = ({ children }) => {
   return (
     <Flex minH={'100vh'} justifyContent="" flexDirection={'column'}>
       <Navbar />
-      <Box flexGrow={'1'}>{children}</Box>
+      <Box mt={'10rem'} flexGrow={'1'}>
+        {children}
+      </Box>
     </Flex>
   );
 };

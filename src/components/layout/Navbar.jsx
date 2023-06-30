@@ -6,6 +6,8 @@ import Search from '../inputs/Search';
 const Navbar = () => {
   return (
     <Flex
+      position={'fixed'}
+      w={'full'}
       padding={'4'}
       flexDir={'column'}
       justifyContent={'center'}
