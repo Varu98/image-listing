@@ -2,6 +2,14 @@
 
 This is an Image Gallery app built with React and Chakra UI. It allows users to search for photos using keywords and displays the results in an infinite scroll grid layout. The app fetches images from the Flickr API and provides a smooth and responsive user experience.
 
+### Live Link
+[Take me to the deployed app](https://image-listing.vercel.app/)
+
+### Demo
+[](https://github.com/Varu98/image-listing/assets/69509962/f9b79dab-5b9e-40e6-a199-2d85eecc65eb)
+
+
+
 ## Table of Contents
 
 - [Image Listing App](#image-listing-app)
