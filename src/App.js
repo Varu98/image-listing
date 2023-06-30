@@ -15,30 +15,36 @@ import Layout from './components/layout/Layout';
 import ImageCard from './components/cards/ImageCard';
 import axios from 'axios';
 import { useImages } from './contexts/useImages';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 function App() {
-  const { images, loading, noResultsToShow } = useImages();
+  const { images, loading, noResultsToShow, fetchImages } = useImages();
 
   return (
     <ChakraProvider theme={theme}>
       <Layout>
-        <Grid
-          padding={4}
-          gap={'10rem'}
-          gridTemplateColumns={[
-            'repeat(1, 1fr)',
-            'repeat(2, 1fr)',
-            'repeat(3, 1fr)',
-          ]}
+        <InfiniteScroll
+          dataLength={images.length}
+          next={fetchImages}
+          hasMore={true}
+          loader={<p>loading...</p>}
         >
-          {loading ? (
-            <p>loading</p>
-          ) : noResultsToShow ? (
-            <p>no results to show</p>
-          ) : (
-            images.map(image => <ImageCard image={image} />)
-          )}
-        </Grid>
+          <Grid
+            padding={4}
+            gap={'10rem'}
+            gridTemplateColumns={[
+              'repeat(1, 1fr)',
+              'repeat(2, 1fr)',
+              'repeat(3, 1fr)',
+            ]}
+          >
+            {noResultsToShow ? (
+              <p>no results to show</p>
+            ) : (
+              images.map(image => <ImageCard image={image} />)
+            )}
+          </Grid>
+        </InfiniteScroll>
       </Layout>
     </ChakraProvider>
   );
