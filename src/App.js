@@ -14,26 +14,10 @@ import { Logo } from './Logo';
 import Layout from './components/layout/Layout';
 import ImageCard from './components/cards/ImageCard';
 import axios from 'axios';
+import { useImages } from './contexts/useImages';
 
 function App() {
-  const [images, setImages] = useState([]);
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    const apiKey = '10e39868768af1480b8aa89c3efe73fa';
-    const fetchImages = async () => {
-      const { data } = await axios.get(
-        'https://www.flickr.com/services/rest/?method=flickr.photos.getRecent&safe_search=3&api_key=10e39868768af1480b8aa89c3efe73fa&format=json&nojsoncallback=1'
-      );
-      if (data) setImages(data.photos.photo);
-      setLoading(false);
-      // console.log(data.photos);
-    };
-    fetchImages();
-  }, []);
-
-  useEffect(() => {
-    console.log(images);
-  }, [images]);
+  const { images, loading, noResultsToShow } = useImages();
 
   return (
     <ChakraProvider theme={theme}>
@@ -41,6 +25,8 @@ function App() {
         <Grid padding={4} gap={'10rem'} gridTemplateColumns={'repeat(3, 1fr)'}>
           {loading ? (
             <p>loading</p>
+          ) : noResultsToShow ? (
+            <p>no results to show</p>
           ) : (
             images.map(image => <ImageCard image={image} />)
           )}
