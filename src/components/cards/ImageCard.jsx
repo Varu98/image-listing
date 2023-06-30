@@ -1,4 +1,4 @@
-import { GridItem, Image, Text, useDisclosure } from '@chakra-ui/react';
+import { GridItem, Image, useDisclosure } from '@chakra-ui/react';
 import React from 'react';
 import ImageModal from '../modals/ImageModal';
 

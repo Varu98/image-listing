@@ -1,34 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import {
-  ChakraProvider,
-  Box,
-  Text,
-  Link,
-  VStack,
-  Code,
-  Grid,
-  theme,
-  Spinner,
-  Flex,
-} from '@chakra-ui/react';
-import { ColorModeSwitcher } from './ColorModeSwitcher';
-import { Logo } from './Logo';
+import React from 'react';
+import { ChakraProvider, Grid, theme } from '@chakra-ui/react';
 import Layout from './components/layout/Layout';
 import ImageCard from './components/cards/ImageCard';
-import axios from 'axios';
 import { useImages } from './contexts/useImages';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Loading from './components/loaders/Loading';
 
 function App() {
-  const {
-    images,
-    loading,
-    noResultsToShow,
-    fetchImages,
-    searchText,
-    fetchImagesBySearch,
-  } = useImages();
+  const { images, noResultsToShow, fetchImages } = useImages();
 
   return (
     <ChakraProvider theme={theme}>

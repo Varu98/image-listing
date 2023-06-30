@@ -1,7 +1,6 @@
 import { Box, Input, List, ListItem } from '@chakra-ui/react';
-import axios from 'axios';
 import { debounce } from 'lodash';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import { useImages } from '../../contexts/useImages';
 
@@ -9,11 +8,8 @@ const Search = () => {
   const { setSearchText, cacheSearch, searchText } = useImages();
   const [toggleSuggestions, setToggleSuggestions] = useState(false);
 
-  console.log(cacheSearch);
-
   const debouncedSearch = debounce(value => {
     setSearchText(value);
-    console.log(value);
   }, 700);
 
   const handleSearchInput = e => {
