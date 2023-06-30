@@ -1,5 +1,7 @@
 import { Box, Flex, Input, Text, VStack } from '@chakra-ui/react';
 import React from 'react';
+import { FaSearch } from 'react-icons/fa';
+import Search from '../Search';
 
 const Navbar = () => {
   return (
@@ -15,7 +17,7 @@ const Navbar = () => {
         <Text fontSize={'3xl'} fontWeight="bold" color={'white'}>
           Search Photos
         </Text>
-        <Input background={'white'} />
+        <Search />
       </VStack>
     </Flex>
   );
