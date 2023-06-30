@@ -38,6 +38,7 @@ function App() {
           next={fetchImages}
           hasMore={true}
           loader={<Loading />}
+          style={{ overflowY: 'hidden' }}
         >
           <Grid
             padding={4}

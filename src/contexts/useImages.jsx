@@ -7,7 +7,7 @@ const ImageContext = createContext();
 const useImages = () => useContext(ImageContext);
 
 const ImageProvider = ({ children }) => {
-  const [count, setcount] = useState(9);
+  const [count, setCount] = useState(9);
   const [page, setPage] = useState(1);
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -20,52 +20,84 @@ const ImageProvider = ({ children }) => {
   }, []);
 
   const fetchImages = async () => {
-    let url;
-    setPage(prevPage => prevPage + 1);
-    const apiKey = '10e39868768af1480b8aa89c3efe73fa';
-    if (searchText.length === 0) {
-      url = `https://www.flickr.com/services/rest/?method=flickr.photos.getRecent&safe_search=3&api_key=10e39868768af1480b8aa89c3efe73fa&format=json&nojsoncallback=1&per_page=${count}&page=${page}`;
-    } else {
-      url = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=10e39868768af1480b8aa89c3efe73fa&text=${searchText}&safe_search=3&format=json&nojsoncallback=1&per_page=${count}&page=${page}`;
-    }
+    const url = buildImageUrl({ searchText, count, page });
     const { data } = await axios.get(url);
-    data.photos.photo.length === 0
-      ? setNoResultsToShow(true)
-      : setNoResultsToShow(false);
 
-    // setImages(data.photos.photo);
+    setPage(prevPage => prevPage + 1);
 
-    setImages(prev => [...prev, ...data.photos.photo]);
-    console.log(data);
+    if (data.photos.photo.length === 0) {
+      setNoResultsToShow(true);
+    } else {
+      setNoResultsToShow(false);
+      setImages(prev => [...prev, ...data.photos.photo]);
+    }
   };
 
   const fetchImagesBySearch = async () => {
     setPage(1);
     setImages([]);
 
+    updateCacheSearch();
+
+    const url = buildImageUrl({ searchText, count, page });
+    const { data } = await axios.get(url);
+
+    setImages(data.photos.photo);
+  };
+
+  const updateCacheSearch = () => {
     const cacheSearch = JSON.parse(localStorage.getItem('cacheSearch')) || [];
+
     if (!cacheSearch.includes(searchText)) {
-      let updatedCache = [...cacheSearch, searchText];
+      const updatedCache = [...cacheSearch, searchText];
       localStorage.setItem('cacheSearch', JSON.stringify(updatedCache));
     } else {
       setCacheSearch(cacheSearch);
     }
-
-    let url;
-    url = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=10e39868768af1480b8aa89c3efe73fa&text=${searchText}&safe_search=3&format=json&nojsoncallback=1&per_page=${count}&page=${page}`;
-    const { data } = await axios.get(url);
-    console.log(cacheSearch);
-    setImages(data.photos.photo);
   };
 
   useEffect(() => {
     const debouncedFetchImagesBySearch = debounce(fetchImagesBySearch, 700);
-    if (searchText.length > 0) debouncedFetchImagesBySearch();
-    if (searchText.length === 0) {
+
+    if (searchText.length > 0) {
+      debouncedFetchImagesBySearch();
+    } else {
       setImages([]);
       fetchImages();
     }
   }, [searchText]);
+
+  const buildImageUrl = ({ searchText, count, page }) => {
+    const apiKey = '10e39868768af1480b8aa89c3efe73fa';
+    const baseUrl = 'https://www.flickr.com/services/rest/';
+    const safeSearch = 3;
+    const format = 'json';
+    const nojsoncallback = 1;
+    const perPage = count;
+    const method =
+      searchText.length === 0
+        ? 'flickr.photos.getRecent'
+        : 'flickr.photos.search';
+    const params = {
+      method,
+      api_key: apiKey,
+      text: searchText,
+      safe_search: safeSearch,
+      format,
+      nojsoncallback,
+      per_page: perPage,
+      page,
+    };
+
+    const queryString = Object.entries(params)
+      .map(
+        ([key, value]) =>
+          `${encodeURIComponent(key)}=${encodeURIComponent(value)}`
+      )
+      .join('&');
+
+    return `${baseUrl}?${queryString}`;
+  };
 
   return (
     <ImageContext.Provider
