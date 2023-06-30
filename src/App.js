@@ -22,7 +22,15 @@ function App() {
   return (
     <ChakraProvider theme={theme}>
       <Layout>
-        <Grid padding={4} gap={'10rem'} gridTemplateColumns={'repeat(3, 1fr)'}>
+        <Grid
+          padding={4}
+          gap={'10rem'}
+          gridTemplateColumns={[
+            'repeat(1, 1fr)',
+            'repeat(2, 1fr)',
+            'repeat(3, 1fr)',
+          ]}
+        >
           {loading ? (
             <p>loading</p>
           ) : noResultsToShow ? (
