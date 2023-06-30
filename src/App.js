@@ -19,9 +19,10 @@ function App() {
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
+    const apiKey = '10e39868768af1480b8aa89c3efe73fa';
     const fetchImages = async () => {
       const { data } = await axios.get(
-        'https://www.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=10e39868768af1480b8aa89c3efe73fa&format=json&nojsoncallback=1'
+        'https://www.flickr.com/services/rest/?method=flickr.photos.getRecent&safe_search=3&api_key=10e39868768af1480b8aa89c3efe73fa&format=json&nojsoncallback=1'
       );
       if (data) setImages(data.photos.photo);
       setLoading(false);
