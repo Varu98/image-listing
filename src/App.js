@@ -18,7 +18,14 @@ import { useImages } from './contexts/useImages';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 function App() {
-  const { images, loading, noResultsToShow, fetchImages } = useImages();
+  const {
+    images,
+    loading,
+    noResultsToShow,
+    fetchImages,
+    searchText,
+    fetchImagesBySearch,
+  } = useImages();
 
   return (
     <ChakraProvider theme={theme}>

@@ -1,11 +1,14 @@
-import { Box, Input } from '@chakra-ui/react';
+import { Box, Input, List, ListItem } from '@chakra-ui/react';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import { useImages } from '../../contexts/useImages';
 
 const Search = () => {
-  const { setSearchText } = useImages();
+  const { setSearchText, cacheSearch, searchText } = useImages();
+  const [toggleSuggestions, setToggleSuggestions] = useState(false);
+
+  console.log(cacheSearch);
 
   const handleSearchInput = e => {
     const { value } = e.target;
@@ -23,7 +26,26 @@ const Search = () => {
       >
         <FaSearch />
       </Box>
-      <Input onChange={handleSearchInput} background={'white'} />
+      <Input
+        position={'relative'}
+        onChange={handleSearchInput}
+        background={'white'}
+      />
+      {searchText.length > 0 && (
+        <List
+          onMouseLeave={() => {
+            setToggleSuggestions(false);
+          }}
+          w={'full'}
+          px={4}
+          bgColor={'white'}
+          position={'absolute'}
+        >
+          {cacheSearch.map(item => (
+            <ListItem pt={1}>{item}</ListItem>
+          ))}
+        </List>
+      )}
     </Box>
   );
 };
