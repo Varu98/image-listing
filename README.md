@@ -6,9 +6,7 @@ This is an Image Gallery app built with React and Chakra UI. It allows users to 
 [Take me to the deployed app](https://image-listing.vercel.app/)
 
 ### Demo
-[demo](https://github.com/Varu98/image-listing/assets/69509962/f9b79dab-5b9e-40e6-a199-2d85eecc65eb)
-
-
+![demo](https://github.com/Varu98/image-listing/assets/69509962/861d970f-ad9f-4dd5-9688-991794347acd)
 
 ## Table of Contents
 
