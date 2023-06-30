@@ -2,11 +2,15 @@ import axios from 'axios';
 import { createContext, useContext, useEffect, useState } from 'react';
 import { debounce } from 'lodash';
 
+// Create a context for the image-related data
 const ImageContext = createContext();
 
+// Custom hook to access the image context
 const useImages = () => useContext(ImageContext);
 
+// Provider component that holds the image data and provides it to its children
 const ImageProvider = ({ children }) => {
+  // State variables for count, page, images, loading, search text, results flag, and cached searches
   const [count, setCount] = useState(9);
   const [page, setPage] = useState(1);
   const [images, setImages] = useState([]);
@@ -16,9 +20,11 @@ const ImageProvider = ({ children }) => {
   const [cacheSearch, setCacheSearch] = useState([]);
 
   useEffect(() => {
+    // Fetch images when the component mounts
     fetchImages();
   }, []);
 
+  // Fetches images from the API
   const fetchImages = async () => {
     const url = buildImageUrl({ searchText, count, page });
     const { data } = await axios.get(url);
@@ -33,6 +39,7 @@ const ImageProvider = ({ children }) => {
     }
   };
 
+  // Fetches images by search text
   const fetchImagesBySearch = async () => {
     setPage(1);
     setImages([]);
@@ -45,6 +52,7 @@ const ImageProvider = ({ children }) => {
     setImages(data.photos.photo);
   };
 
+  // Updates the cache of search queries
   const updateCacheSearch = () => {
     const cacheSearch = JSON.parse(localStorage.getItem('cacheSearch')) || [];
 
@@ -57,6 +65,7 @@ const ImageProvider = ({ children }) => {
   };
 
   useEffect(() => {
+    // Debounce the fetchImagesBySearch function to avoid excessive API calls
     const debouncedFetchImagesBySearch = debounce(fetchImagesBySearch, 700);
 
     if (searchText.length > 0) {
@@ -67,6 +76,7 @@ const ImageProvider = ({ children }) => {
     }
   }, [searchText]);
 
+  // Builds the URL for the Flickr API request
   const buildImageUrl = ({ searchText, count, page }) => {
     const apiKey = '10e39868768af1480b8aa89c3efe73fa';
     const baseUrl = 'https://www.flickr.com/services/rest/';

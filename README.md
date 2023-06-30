@@ -1,68 +1,103 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Image Listing App
 
-## Available Scripts
+This is an Image Gallery app built with React and Chakra UI. It allows users to search for photos using keywords and displays the results in an infinite scroll grid layout. The app fetches images from the Flickr API and provides a smooth and responsive user experience.
 
-In the project directory, you can run:
+## Table of Contents
 
-### `npm start`
+- [Image Listing App](#image-listing-app)
+  - [Table of Contents](#table-of-contents)
+  - [Features](#features)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Folder Structure](#folder-structure)
+  - [Dependencies](#dependencies)
+  - [Contributing](#contributing)
+  - [License](#license)
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Features
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+- Search for photos using keywords
+- Infinite scroll grid layout to display the images
+- Modal view to display the selected image in a larger size
+- Cached search history for quicker access to previous searches
 
-### `npm test`
+## Installation
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Clone the repository:
 
-### `npm run build`
+   ```bash
+   git clone https://github.com/your-username/image-gallery-app.git
+   ```
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. Change to the project directory:
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+   ```bash
+   cd image-gallery-app
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. Install the dependencies:
 
-### `npm run eject`
+   ```bash
+   npm install
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Usage
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Obtain an API key from [Flickr API](https://www.flickr.com/services/api/).
+2. Rename the `.env.example` file to `.env` and replace `<YOUR_API_KEY>` with your actual API key.
+3. Start the development server:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+   ```bash
+   npm start
+   ```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+4. Open your browser and visit `http://localhost:3000` to view the app.
 
-## Learn More
+## Folder Structure
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The project's folder structure is as follows:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```plaintext
+image-gallery-app/
+├── public/
+│   ├── index.html
+│   └── ...
+├── src/
+│   ├── components/
+│   │   ├── cards/
+│   │   │   └── ImageCard.js
+│   │   ├── inputs/
+│   │   │   └── Search.js
+│   │   ├── layout/
+│   │   │   └── Layout.js
+│   │   ├── loaders/
+│   │   │   └── Loading.js
+│   │   └── modals/
+│   │       └── ImageModal.js
+│   ├── contexts/
+│   │   └── useImages.js
+│   ├── App.js
+│   └── index.js
+├── .env.example
+├── .gitignore
+├── package.json
+├── README.md
+└── ...
+```
 
-### Code Splitting
+## Dependencies
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+The app relies on the following dependencies:
 
-### Analyzing the Bundle Size
+- `@chakra-ui/react`: Provides the UI components and theming for the app.
+- `axios`: Handles HTTP requests to fetch data from the Flickr API.
+- `react-infinite-scroll-component`: Implements the infinite scroll functionality.
+- `lodash`: Provides utility functions, such as debouncing search requests.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+## Contributing
 
-### Making a Progressive Web App
+Contributions are welcome! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+## License
 
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+This project is licensed under the [MIT License](LICENSE).
