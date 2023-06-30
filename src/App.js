@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   ChakraProvider,
   Box,
@@ -11,30 +11,27 @@ import {
 } from '@chakra-ui/react';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 import { Logo } from './Logo';
+import Layout from './components/layout/Layout';
+import ImageCard from './components/cards/ImageCard';
+import axios from 'axios';
+import { useImages } from './contexts/useImages';
 
 function App() {
+  const { images, loading, noResultsToShow } = useImages();
+
   return (
     <ChakraProvider theme={theme}>
-      <Box textAlign="center" fontSize="xl">
-        <Grid minH="100vh" p={3}>
-          <ColorModeSwitcher justifySelf="flex-end" />
-          <VStack spacing={8}>
-            <Logo h="40vmin" pointerEvents="none" />
-            <Text>
-              Edit <Code fontSize="xl">src/App.js</Code> and save to reload.
-            </Text>
-            <Link
-              color="teal.500"
-              href="https://chakra-ui.com"
-              fontSize="2xl"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn Chakra
-            </Link>
-          </VStack>
+      <Layout>
+        <Grid padding={4} gap={'10rem'} gridTemplateColumns={'repeat(3, 1fr)'}>
+          {loading ? (
+            <p>loading</p>
+          ) : noResultsToShow ? (
+            <p>no results to show</p>
+          ) : (
+            images.map(image => <ImageCard image={image} />)
+          )}
         </Grid>
-      </Box>
+      </Layout>
     </ChakraProvider>
   );
 }
