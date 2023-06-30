@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { createContext, useContext, useEffect, useState } from 'react';
+import { debounce } from 'lodash';
 
 const ImageContext = createContext();
 
@@ -58,7 +59,8 @@ const ImageProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    if (searchText.length > 0) fetchImagesBySearch();
+    const debouncedFetchImagesBySearch = debounce(fetchImagesBySearch, 500);
+    if (searchText.length > 0) debouncedFetchImagesBySearch();
     if (searchText.length === 0) {
       setImages([]);
       fetchImages();
