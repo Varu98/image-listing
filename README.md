@@ -100,6 +100,16 @@ The app relies on the following dependencies:
 - `react-infinite-scroll-component`: Implements the infinite scroll functionality.
 - `lodash`: Provides utility functions, such as debouncing search requests.
 
+### 🛑 Note
+
+**Important Note:** It is important to be aware that even though the safe search option is implemented in the app, there may still be restricted images that show up in the search results. This is due to the nature of the Flickr API and the possibility of some photos not being properly marked as unsafe.
+
+Upon researching this issue, the developer found the following information from a Stack Overflow answer:
+
+> "Flickr API does have options for filtering search results via the 'safe_search' setting. Values - 1 for safe, 2 for moderated, 3 for restricted. But unfortunately, there are many photos that are uploaded and not been marked as unsafe. So even though this setting will filter results at some level, it's not completely reliable."
+
+Therefore, please exercise caution when using the app, and if you come across any inappropriate content, kindly report it to the app administrator or the Flickr platform.
+
 ## Contributing
 
 Contributions are welcome! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request.
