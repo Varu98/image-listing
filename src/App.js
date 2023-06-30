@@ -8,6 +8,8 @@ import {
   Code,
   Grid,
   theme,
+  Spinner,
+  Flex,
 } from '@chakra-ui/react';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 import { Logo } from './Logo';
@@ -16,6 +18,7 @@ import ImageCard from './components/cards/ImageCard';
 import axios from 'axios';
 import { useImages } from './contexts/useImages';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import Loading from './components/loaders/Loading';
 
 function App() {
   const {
@@ -34,7 +37,7 @@ function App() {
           dataLength={images.length}
           next={fetchImages}
           hasMore={true}
-          loader={<p>loading...</p>}
+          loader={<Loading />}
         >
           <Grid
             padding={4}
