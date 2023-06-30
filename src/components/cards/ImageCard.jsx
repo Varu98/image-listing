@@ -1,11 +1,18 @@
-import { Box, GridItem, Image, Text } from '@chakra-ui/react';
+import { GridItem, Image, Text } from '@chakra-ui/react';
 import React from 'react';
 
-const ImageCard = () => {
+const ImageCard = ({ image }) => {
+  const { id, server, secret } = image;
   return (
-    <GridItem rounded="md" h={'20rem'} bg="gray.200">
-      <Text w={'25rem'}>ImageCard</Text>
-      <Image />
+    <GridItem
+      rounded="md"
+      display={'flex'}
+      justifyContent={'center'}
+      alignItems={'center'}
+    >
+      <Image
+        src={`https://live.staticflickr.com/${server}/${id}_${secret}.jpg`}
+      />
     </GridItem>
   );
 };
