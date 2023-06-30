@@ -59,7 +59,7 @@ const ImageProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const debouncedFetchImagesBySearch = debounce(fetchImagesBySearch, 500);
+    const debouncedFetchImagesBySearch = debounce(fetchImagesBySearch, 700);
     if (searchText.length > 0) debouncedFetchImagesBySearch();
     if (searchText.length === 0) {
       setImages([]);

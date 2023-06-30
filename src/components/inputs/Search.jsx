@@ -14,7 +14,7 @@ const Search = () => {
   const debouncedSearch = debounce(value => {
     setSearchText(value);
     console.log(value);
-  }, 500);
+  }, 700);
 
   const handleSearchInput = e => {
     const { value } = e.target;
